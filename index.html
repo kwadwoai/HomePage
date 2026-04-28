@@ -8,17 +8,49 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
 <style>
+:root{
+  --bg:#0b1220;
+  --panel:#111827;
+  --border:#1f2937;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --accent:#2563eb;
+}
+
+body.light{
+  --bg:#f9fafb;
+  --panel:#ffffff;
+  --border:#e5e7eb;
+  --text:#111827;
+  --muted:#6b7280;
+  --accent:#2563eb;
+}
+
 body{
   margin:0;
   font-family:Inter, sans-serif;
-  background:#0b1220;
-  color:#e5e7eb;
+  background:var(--bg);
+  color:var(--text);
+  transition:background .2s, color .2s;
 }
 
 .container{
   max-width:1000px;
   margin:auto;
   padding:70px 24px;
+}
+
+/* TOGGLE */
+.toggle{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:12px;
 }
 
 /* HERO */
@@ -33,7 +65,7 @@ h1{
 }
 
 .subtitle{
-  color:#9ca3af;
+  color:var(--muted);
   max-width:700px;
   margin:auto;
   line-height:1.7;
@@ -41,8 +73,8 @@ h1{
 
 /* PROFILE CARD */
 .profile-card{
-  background:#111827;
-  border:1px solid #1f2937;
+  background:var(--panel);
+  border:1px solid var(--border);
   border-radius:14px;
   padding:25px;
   text-align:center;
@@ -55,7 +87,7 @@ h1{
   height:110px;
   border-radius:50%;
   object-fit:cover;
-  border:2px solid #2563eb;
+  border:2px solid var(--accent);
   margin-bottom:12px;
 }
 
@@ -71,27 +103,31 @@ h1{
 }
 
 .bio{
-  color:#9ca3af;
+  color:var(--muted);
   font-size:13.5px;
   line-height:1.6;
   margin-bottom:16px;
 }
 
+/* LINKS WITH ICONS */
 .links a{
-  display:inline-block;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
   margin:5px 8px;
   padding:8px 12px;
   font-size:13px;
-  background:#1f2937;
-  border:1px solid #374151;
+  background:var(--panel);
+  border:1px solid var(--border);
   border-radius:8px;
-  color:#e5e7eb;
+  color:var(--text);
   text-decoration:none;
 }
 
 .links a:hover{
-  background:#2563eb;
-  border-color:#2563eb;
+  background:var(--accent);
+  border-color:var(--accent);
+  color:white;
 }
 
 /* GRID */
@@ -103,8 +139,8 @@ h1{
 }
 
 .card{
-  background:#111827;
-  border:1px solid #1f2937;
+  background:var(--panel);
+  border:1px solid var(--border);
   border-radius:12px;
   padding:20px;
 }
@@ -114,7 +150,7 @@ h1{
 }
 
 .card p{
-  color:#9ca3af;
+  color:var(--muted);
   font-size:14px;
 }
 
@@ -122,7 +158,7 @@ h1{
   display:inline-block;
   margin-top:12px;
   padding:10px 14px;
-  background:#2563eb;
+  background:var(--accent);
   color:white;
   border-radius:8px;
   text-decoration:none;
@@ -130,7 +166,7 @@ h1{
 }
 
 .btn:hover{
-  background:#1d4ed8;
+  opacity:0.9;
 }
 
 /* MOBILE */
@@ -143,6 +179,9 @@ h1{
 </head>
 
 <body>
+
+<!-- DARK MODE TOGGLE -->
+<div class="toggle" onclick="toggleTheme()">Toggle Theme</div>
 
 <div class="container">
 
@@ -168,13 +207,21 @@ h1{
 
     <p class="bio">
       I design and audit machine learning systems in financial environments,
-      focusing on fraud detection & prevention models, credit risk models and risk management models. I audit for fairness, explainability, and regulatory compliance
-      across NIST AI RMF, EU AI Act, and Bank of Ghana CISD frameworks.
+      focusing on fraud detection & prevention models, credit risk models and risk management models.
+      I audit for fairness, explainability, and regulatory compliance across NIST AI RMF,
+      EU AI Act, and Bank of Ghana CISD frameworks.
     </p>
 
     <div class="links">
-      <a href="mailto:kwadwo_amponsah@yahoo.com">Email Me</a>
-      <a href="https://linkedin.com/in/kwadwoamponsah" target="_blank">LinkedIn</a>
+      <a href="mailto:kwadwo_amponsah@yahoo.com">
+        <!-- EMAIL ICON -->
+        ✉️ Email
+      </a>
+
+      <a href="https://linkedin.com/in/kwadwoamponsah" target="_blank">
+        <!-- LINKEDIN ICON -->
+        🔗 LinkedIn
+      </a>
     </div>
 
   </div>
@@ -202,6 +249,12 @@ h1{
   </div>
 
 </div>
+
+<script>
+function toggleTheme(){
+  document.body.classList.toggle("light");
+}
+</script>
 
 </body>
 </html>
