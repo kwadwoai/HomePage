@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>AI Model Governance Audit · ClearBoxAI</title>
+<title>Audit Documentation · ClearBoxAI</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
 <style>
@@ -47,29 +47,33 @@ input:checked + .slider { background: #60a5fa; }
 input:checked + .slider .sun-moon { transform: translateX(-20px); background-color: #fbbf24; }
 
 /* HEADER */
-.header { margin-bottom: 50px; }
-.kicker { font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
-h1 { font-size:32px; font-weight:600; margin-bottom:12px; letter-spacing: -0.02em; }
-.subtitle { color:var(--muted); max-width:700px; font-size:15px; }
-.meta { margin-top:20px; font-size:13px; color:var(--muted); }
+.header { margin-bottom: 40px; }
+.back-link { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: var(--accent); font-size: 13px; margin-bottom: 20px; font-weight: 500; }
+h1 { font-size:32px; font-weight:600; margin: 0 0 10px 0; letter-spacing: -0.02em; }
+.meta { font-size:14px; color:var(--muted); }
 
-/* SUMMARY BOX */
-.summary {
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:24px;
-  margin-bottom:40px;
+/* VISUAL ROADMAP (Mobile Responsive) */
+.roadmap {
+  display: flex;
+  gap: 15px;
+  margin: 40px 0;
 }
-.summary h3 { font-size:14px; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:15px; color: var(--accent); }
-.summary ul { font-size:14px; color:var(--muted); padding-left:20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.roadmap-box {
+  flex: 1;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.roadmap-box h4 { margin: 0 0 5px 0; font-size: 11px; text-transform: uppercase; color: var(--muted); }
+.roadmap-box div { font-weight: 600; font-size: 15px; }
 
 /* TABLES */
 .phase-section { margin-top: 50px; }
 .phase-header { 
-  display: flex; align-items: center; gap: 12px; 
-  font-size: 16px; font-weight: 600; margin-bottom: 20px; 
-  padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px; 
+  font-size: 16px; font-weight: 600; margin-bottom: 15px; 
 }
 .dot { width: 8px; height: 8px; border-radius: 50%; }
 
@@ -77,24 +81,23 @@ h1 { font-size:32px; font-weight:600; margin-bottom:12px; letter-spacing: -0.02e
   background: var(--panel); 
   border: 1px solid var(--border); 
   border-radius: 12px; 
-  overflow: hidden; 
+  overflow-x: auto; 
 }
-.table { width:100%; border-collapse:collapse; text-align:left; }
-.table th { background: rgba(0,0,0,0.02); color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:0.05em; padding: 14px 20px; }
-.table td { padding: 16px 20px; font-size: 14px; border-top: 1px solid var(--border); }
+.table { width:100%; border-collapse:collapse; text-align:left; min-width: 600px; }
+.table th { background: rgba(0,0,0,0.02); color:var(--muted); font-size:11px; text-transform:uppercase; padding: 14px 20px; border-bottom: 1px solid var(--border); }
+.table td { padding: 16px 20px; font-size: 13.5px; border-bottom: 1px solid var(--border); }
+.table tr:last-child td { border-bottom: none; }
 
 .link-btn {
-  display:inline-block; padding:6px 12px; font-size:12px; border-radius:6px; 
+  display:inline-block; padding:6px 12px; font-size:11px; border-radius:6px; 
   background:var(--bg); color:var(--accent); text-decoration:none; 
-  border:1px solid var(--border); transition: 0.2s;
+  border:1px solid var(--border); font-weight: 600;
 }
 .link-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
-.footer { margin-top:80px; padding:20px 0; border-top:1px solid var(--border); color:var(--muted); font-size:12px; text-align: center; }
-
 @media(max-width:768px){
-  .table th:nth-child(2), .table td:nth-child(2) { display: none; }
-  h1 { font-size: 24px; }
+  .roadmap { flex-direction: column; }
+  h1 { font-size: 26px; }
 }
 </style>
 </head>
@@ -109,68 +112,72 @@ h1 { font-size:32px; font-weight:600; margin-bottom:12px; letter-spacing: -0.02e
 </div>
 
 <div class="container">
+  <a href="index.html" class="back-link">← Back to Profile</a>
+
   <div class="header">
-    <div class="kicker">Audit Report · Mobile Money</div>
-    <h1>AI Governance & Risk Assessment</h1>
-    <p class="subtitle">Comprehensive evaluation of the PaySim fraud detection lifecycle against international and local regulatory frameworks.</p>
-    <div class="meta">Lead Auditor: <b>Kwadwo Amponsah</b> · April 2026</div>
+    <h1>Mobile Money Audit Log</h1>
+    <div class="meta">System: <b>PaySim Fraud Detection</b> · Lead: <b>Kwadwo Amponsah</b></div>
   </div>
 
-  <div class="summary">
-    <h3>Executive Findings</h3>
-    <ul>
-      <li>ROC-AUC: 0.94 (Strong)</li>
-      <li>Bias: Mid-balance variance</li>
-      <li>Overall Risk: Medium</li>
-      <li>Status: Active Monitoring</li>
-    </ul>
+  <div class="roadmap">
+    <div class="roadmap-box" style="border-top: 4px solid var(--pre)">
+      <h4>Phase 1</h4><div style="color:var(--pre)">Pre-Training</div>
+    </div>
+    <div class="roadmap-box" style="border-top: 4px solid var(--train)">
+      <h4>Phase 2</h4><div style="color:var(--train)">Training</div>
+    </div>
+    <div class="roadmap-box" style="border-top: 4px solid var(--post)">
+      <h4>Phase 3</h4><div style="color:var(--post)">Post-Training</div>
+    </div>
   </div>
 
   <div class="phase-section">
-    <div class="phase-header"><div class="dot" style="background:var(--pre)"></div> Phase 1: Pre-Training</div>
+    <div class="phase-header"><div class="dot" style="background:var(--pre)"></div> Phase 1: Governance & Data Preparation</div>
     <div class="table-wrapper">
       <table class="table">
-        <thead><tr><th>Control</th><th>Description</th><th>Regulation</th><th>Evidence</th></tr></thead>
+        <thead><tr><th>Control</th><th>Description</th><th>Standard</th><th>Artifact</th></tr></thead>
         <tbody>
-          <tr><td>Scope</td><td>System & Objective definition</td><td>EU Art.9 · NIST GOV 1.1</td><td><a class="link-btn" href="https://kwadwoai.github.io/Scope_Paysim/">View</a></td></tr>
-          <tr><td>Environment</td><td>Secure Infrastructure setup</td><td>NIST MAP · CISD §4.1</td><td><a class="link-btn" href="https://kwadwoai.github.io/Environment_Setup_Paysim/">View</a></td></tr>
-          <tr><td>Data Integrity</td><td>Dataset quality validation</td><td>EU Art.10 · NIST MAP 2.1</td><td><a class="link-btn" href="https://kwadwoai.github.io/DEA_Paysim/">View</a></td></tr>
-          <tr><td>Proxy Detection</td><td>Sensitive feature masking</td><td>EU Art.10(5)</td><td><a class="link-btn" href="https://kwadwoai.github.io/Proxy_Paysim/">View</a></td></tr>
-          <tr><td>E.D.A</td><td>Exploratory Data Analysis</td><td>NIST MAP 1.1</td><td><a class="link-btn" href="https://kwadwoai.github.io/EDA_PaySim/">View</a></td></tr>
-          <tr><td>Feature Eng.</td><td>Constraint-based construction</td><td>EU Art.10 · NIST MAP 2.2</td><td><a class="link-btn" href="https://kwadwoai.github.io/FE_Paysim/">View</a></td></tr>
+          <tr><td>System Scope</td><td>Inventory & Objective definition</td><td>EU Art.9</td><td><a class="link-btn" href="https://kwadwoai.github.io/Scope_Paysim/">Review</a></td></tr>
+          <tr><td>Env. Setup</td><td>Secure sandbox configuration</td><td>CISD §4.1</td><td><a class="link-btn" href="https://kwadwoai.github.io/Environment_Setup_Paysim/">Review</a></td></tr>
+          <tr><td>Data Integrity</td><td>Quality & Bias testing</td><td>NIST MAP 2.1</td><td><a class="link-btn" href="https://kwadwoai.github.io/DEA_Paysim/">Review</a></td></tr>
+          <tr><td>Proxy Detection</td><td>Attribute masking</td><td>EU Art.10(5)</td><td><a class="link-btn" href="https://kwadwoai.github.io/Proxy_Paysim/">Review</a></td></tr>
+          <tr><td>E.D.A</td><td>Exploratory Analysis</td><td>NIST MAP 1.1</td><td><a class="link-btn" href="https://kwadwoai.github.io/EDA_PaySim/">Review</a></td></tr>
+          <tr><td>Feature Eng.</td><td>Logic-based construction</td><td>NIST MAP 2.2</td><td><a class="link-btn" href="https://kwadwoai.github.io/FE_Paysim/">Review</a></td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
   <div class="phase-section">
-    <div class="phase-header"><div class="dot" style="background:var(--train)"></div> Phase 2: Training</div>
+    <div class="phase-header"><div class="dot" style="background:var(--train)"></div> Phase 2: Algorithmic Training</div>
     <div class="table-wrapper">
       <table class="table">
-        <thead><tr><th>Control</th><th>Description</th><th>Regulation</th><th>Evidence</th></tr></thead>
+        <thead><tr><th>Control</th><th>Description</th><th>Standard</th><th>Artifact</th></tr></thead>
         <tbody>
-          <tr><td>Model Training</td><td>Algorithm selection & tuning</td><td>NIST MAP 2.0 · CISD §6</td><td><a class="link-btn" href="https://kwadwoai.github.io/Training_Paysim/">View</a></td></tr>
+          <tr><td>Model Training</td><td>Algorithm selection & tuning</td><td>CISD §6</td><td><a class="link-btn" href="https://kwadwoai.github.io/Training_Paysim/">Review</a></td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
   <div class="phase-section">
-    <div class="phase-header"><div class="dot" style="background:var(--post)"></div> Phase 3: Post-Training</div>
+    <div class="phase-header"><div class="dot" style="background:var(--post)"></div> Phase 3: Assurance & Performance</div>
     <div class="table-wrapper">
       <table class="table">
-        <thead><tr><th>Control</th><th>Description</th><th>Regulation</th><th>Evidence</th></tr></thead>
+        <thead><tr><th>Control</th><th>Description</th><th>Standard</th><th>Artifact</th></tr></thead>
         <tbody>
-          <tr><td>Performance</td><td>Threshold & Metrics Audit</td><td>NIST MEASURE 2.5</td><td><a class="link-btn" href="https://kwadwoai.github.io/PeformEval_Paysim/">View</a></td></tr>
-          <tr><td>Fairness & Bias</td><td>Disparity Analysis</td><td>EU Art.10(5) · CISD §7</td><td><a class="link-btn" href="https://kwadwoai.github.io/Fairness_Bias_Paysim/">View</a></td></tr>
-          <tr><td>Error Analysis</td><td>FP/FN Financial impact</td><td>NIST MEASURE 2.6</td><td><a class="link-btn" href="https://kwadwoai.github.io/Error_FP_FN_Paysim/">View</a></td></tr>
-          <tr><td>Explainability</td><td>SHAP Interpretability</td><td>EU Art.13 · NIST MANAGE</td><td><a class="link-btn" href="https://kwadwoai.github.io/Explainability_Paysim/">View</a></td></tr>
+          <tr><td>Performance</td><td>Metrics & Threshold Audit</td><td>NIST MEASURE</td><td><a class="link-btn" href="https://kwadwoai.github.io/PeformEval_Paysim/">Review</a></td></tr>
+          <tr><td>Fairness & Bias</td><td>Group disparity analysis</td><td>EU Art.10</td><td><a class="link-btn" href="https://kwadwoai.github.io/Fairness_Bias_Paysim/">Review</a></td></tr>
+          <tr><td>Error Analysis</td><td>Financial impact assessment</td><td>NIST MEASURE</td><td><a class="link-btn" href="https://kwadwoai.github.io/Error_FP_FN_Paysim/">Review</a></td></tr>
+          <tr><td>Explainability</td><td>SHAP Interpretability</td><td>EU Art.13</td><td><a class="link-btn" href="https://kwadwoai.github.io/Explainability_Paysim/">Review</a></td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <div class="footer">ClearBoxAI · Governance & Risk Assurance</div>
+  <footer style="margin-top:80px; text-align:center; color:var(--muted); font-size:12px;">
+    ClearBoxAI · Independent Risk Assurance Services
+  </footer>
 </div>
 
 <script>
