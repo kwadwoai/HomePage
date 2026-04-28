@@ -209,10 +209,21 @@ h1 {
 </div>
 
 <script>
-function toggleTheme(){
+function toggleTheme() {
   const isLight = document.body.classList.toggle("light");
+  localStorage.setItem("theme", isLight ? "light" : "dark");
   document.getElementById("theme-text").innerText = isLight ? "Light" : "Dark";
 }
+
+// This part runs as soon as the page loads
+(function() {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "light") {
+    document.body.classList.add("light");
+    document.getElementById("checkbox").checked = true;
+    document.getElementById("theme-text").innerText = "Light";
+  }
+})();
 </script>
 
 </body>
