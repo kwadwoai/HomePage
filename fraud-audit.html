@@ -38,6 +38,7 @@ body {
   color:var(--text);
   line-height: 1.6;
   min-height: 100vh;
+  transition: background .3s, color .3s;
 }
 
 .container {
@@ -45,6 +46,32 @@ body {
   margin: auto;
   padding: 60px 24px;
 }
+
+/* THEME TOGGLE (SAME AS INDEX) */
+.theme-switch-wrapper {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 100;
+}
+.theme-switch { display: inline-block; height: 28px; position: relative; width: 54px; }
+.theme-switch input { display: none; }
+.slider {
+  background: #2b394d; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0;
+  transition: .4s; border-radius: 34px; border: 1px solid var(--border); overflow: hidden;
+}
+.slider:before { content: "★"; position: absolute; color: rgba(255,255,255,0.3); font-size: 8px; top: 4px; left: 12px; }
+.sun-moon {
+  background-color: #f5f3ce; bottom: 3px; height: 20px; left: 28px; position: absolute;
+  transition: .4s; width: 20px; border-radius: 50%; box-shadow: inset -3px -2px 0 0px #d1d0b5;
+}
+input:checked + .slider { background: #a5d1e1; }
+input:checked + .slider:before { content: ""; }
+input:checked + .slider .sun-moon { transform: translateX(-24px); background-color: #ffdb00; box-shadow: 0 0 10px #ffdb00; }
+#theme-text { margin-top: 6px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
 /* BACK LINK */
 .back {
@@ -56,29 +83,16 @@ body {
   font-weight: 500;
   color: var(--accent);
   text-decoration: none;
-  transition: opacity 0.2s;
 }
 
-.back:hover { opacity: 0.8; }
-
-/* HEADER */
+/* HEADER & SECTIONS */
 .header { margin-bottom: 40px; }
-.kicker {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--muted);
-  margin-bottom: 12px;
-  font-weight: 600;
-}
+.kicker { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-weight: 600; }
 h1 { font-size: 32px; margin: 0 0 16px 0; font-weight: 600; line-height: 1.2; }
 .subtitle { color: var(--muted); font-size: 16px; max-width: 650px; }
-
-/* SECTIONING */
 .section { margin-top: 40px; }
 h3 { font-size: 18px; margin-bottom: 16px; font-weight: 600; border-left: 3px solid var(--accent); padding-left: 12px; }
 
-/* PANELS */
 .box {
   background: var(--panel);
   backdrop-filter: blur(12px);
@@ -87,66 +101,34 @@ h3 { font-size: 18px; margin-bottom: 16px; font-weight: 600; border-left: 3px so
   padding: 24px;
 }
 
-.list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
+.list { padding: 0; margin: 0; list-style: none; }
+.list li { position: relative; padding-left: 24px; margin-bottom: 12px; font-size: 14px; }
+.list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
 
-.list li {
-  position: relative;
-  padding-left: 24px;
-  margin-bottom: 12px;
-  font-size: 14px;
-  color: var(--text);
-}
-
-.list li::before {
-  content: "→";
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-  font-weight: bold;
-}
-
-/* FRAMEWORKS */
 .tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
-.tag {
-  padding: 6px 12px;
-  font-size: 11px;
-  font-weight: 600;
-  border-radius: 6px;
-  background: var(--border);
-  color: var(--text);
-  border: 1px solid var(--border);
-}
+.tag { padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 6px; background: var(--border); border: 1px solid var(--border); }
 
-/* CTA */
 .cta { text-align: center; margin-top: 60px; }
 .btn {
-  display: inline-block;
-  padding: 16px 32px;
-  font-size: 14px;
-  font-weight: 600;
-  background: var(--accent);
-  color: white;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-block; padding: 16px 32px; font-size: 14px; font-weight: 600; background: var(--accent);
+  color: white; border-radius: 10px; text-decoration: none;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
-}
-
-@media(max-width:600px) {
-  h1 { font-size: 26px; }
-}
+@media(max-width:600px) { h1 { font-size: 26px; } }
 </style>
 </head>
 
-<body class="dark"> <div class="container">
+<body>
+
+<div class="theme-switch-wrapper">
+  <label class="theme-switch" for="checkbox">
+    <input type="checkbox" id="checkbox" onclick="toggleTheme()" />
+    <div class="slider"><div class="sun-moon"></div></div>
+  </label>
+  <div id="theme-text">Dark</div>
+</div>
+
+<div class="container">
   <a class="back" href="index.html">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
     Return to Profile
@@ -155,19 +137,17 @@ h3 { font-size: 18px; margin-bottom: 16px; font-weight: 600; border-left: 3px so
   <div class="header">
     <div class="kicker">Case Study: Model Risk Audit</div>
     <h1>Mobile Money Fraud Detection Audit</h1>
-    <p class="subtitle">
-      A technical deep-dive into bias, explainability, and regulatory alignment for automated fraud detection systems in emerging markets.
-    </p>
+    <p class="subtitle">A technical deep-dive into bias, explainability, and regulatory alignment for financial systems.</p>
   </div>
 
   <div class="section">
     <h3>Scope of Engagement</h3>
     <div class="box">
       <ul class="list">
-        <li><strong>Lifecycle Governance:</strong> Assessment from data ingestion to model retirement.</li>
-        <li><strong>Fairness Metrics:</strong> Evaluating Demographic Parity and Equalized Odds across balance tiers.</li>
-        <li><strong>Explainability:</strong> SHAP-based feature importance mapping to identify "Black Box" risks.</li>
-        <li><strong>Error Analysis:</strong> Quantifying the financial and reputational impact of False Positives.</li>
+        <li><strong>Lifecycle Governance:</strong> Data ingestion to model retirement.</li>
+        <li><strong>Fairness Metrics:</strong> Demographic Parity and Equalized Odds.</li>
+        <li><strong>Explainability:</strong> SHAP-based feature importance mapping.</li>
+        <li><strong>Error Analysis:</strong> Financial impact of False Positives.</li>
       </ul>
     </div>
   </div>
@@ -176,7 +156,7 @@ h3 { font-size: 18px; margin-bottom: 16px; font-weight: 600; border-left: 3px so
     <h3>Governance Frameworks</h3>
     <div class="tags">
       <span class="tag">NIST AI RMF 1.0</span>
-      <span class="tag">EU AI ACT (High-Risk)</span>
+      <span class="tag">EU AI ACT</span>
       <span class="tag">BANK OF GHANA CISD</span>
     </div>
   </div>
@@ -185,20 +165,34 @@ h3 { font-size: 18px; margin-bottom: 16px; font-weight: 600; border-left: 3px so
     <h3>Key Insights</h3>
     <div class="box">
       <ul class="list">
-        <li>High performance on velocity-based fraud indicators (ROC-AUC 0.94).</li>
-        <li>Observed bias in balance-dependent behavioral features.</li>
-        <li>Fairness risk classified as <strong>Material</strong> under current Bank of Ghana guidelines.</li>
-        <li>SHAP values reveal over-reliance on a single proxy feature, increasing model drift risk.</li>
+        <li>Strong performance on velocity indicators (ROC-AUC 0.94).</li>
+        <li>Bias observed in balance-dependent behavioral features.</li>
+        <li>Fairness risk classified as <strong>Material</strong>.</li>
       </ul>
     </div>
   </div>
 
   <div class="cta">
-    <a class="btn" href="YOUR_FULL_AUDIT_PAGE_LINK_HERE" target="_blank">
-      Access Full Documentation →
-    </a>
+    <a class="btn" href="#" target="_blank">Access Full Documentation →</a>
   </div>
 </div>
+
+<script>
+function toggleTheme() {
+  const isLight = document.body.classList.toggle("light");
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+  document.getElementById("theme-text").innerText = isLight ? "Light" : "Dark";
+}
+
+(function() {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "light") {
+    document.body.classList.add("light");
+    document.getElementById("checkbox").checked = true;
+    document.getElementById("theme-text").innerText = "Light";
+  }
+})();
+</script>
 
 </body>
 </html>
