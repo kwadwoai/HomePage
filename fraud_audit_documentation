@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Governance Audit · ClearBoxAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<style>
+:root{
+  --bg:#0b1220;
+  --panel: rgba(17, 24, 39, 0.85);
+  --border:#1f2937;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --accent:#2563eb;
+  --pre:#3b82f6;
+  --train:#f59e0b;
+  --post:#10b981;
+  --glow: rgba(37, 99, 235, 0.1);
+}
+
+body.light{
+  --bg:#f9fafb;
+  --panel: rgba(255, 255, 255, 0.9);
+  --border:#e5e7eb;
+  --text:#111827;
+  --muted:#4b5563;
+  --accent:#2563eb;
+}
+
+body {
+  font-family:Inter, sans-serif;
+  background: var(--bg);
+  background-image: radial-gradient(at 0% 0%, var(--glow) 0px, transparent 50%);
+  background-attachment: fixed;
+  color:var(--text);
+  margin:0; transition: background .3s, color .3s;
+}
+
+.container { max-width:1100px; margin:auto; padding:50px 24px 80px; }
+
+/* THEME TOGGLE (Consistent with Home) */
+.theme-switch-wrapper { position: fixed; top: 20px; right: 20px; display: flex; flex-direction: column; align-items: center; z-index: 100; }
+.theme-switch { display: inline-block; height: 28px; position: relative; width: 54px; }
+.theme-switch input { display: none; }
+.slider { background: #2b394d; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; border: 1px solid var(--border); overflow: hidden; }
+.sun-moon { background-color: #f5f3ce; bottom: 3px; height: 20px; left: 28px; position: absolute; transition: .4s; width: 20px; border-radius: 50%; }
+input:checked + .slider { background: #a5d1e1; }
+input:checked + .slider .sun-moon { transform: translateX(-24px); background-color: #ffdb00; }
+#theme-text { margin-top: 6px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+/* FLOW CHART NAVIGATION */
+.roadmap {
+  display: flex; justify-content: space-between; align-items: center;
+  margin: 40px 0; gap: 15px; position: relative;
+}
+
+.roadmap-step {
+  flex: 1; background: var(--panel); border: 1px solid var(--border);
+  padding: 15px; border-radius: 12px; text-align: center;
+  text-decoration: none; color: inherit; transition: transform 0.2s;
+  backdrop-filter: blur(8px);
+}
+
+.roadmap-step:hover { transform: translateY(-5px); border-color: var(--accent); }
+.roadmap-step h4 { font-size: 11px; text-transform: uppercase; margin-bottom: 5px; color: var(--muted); }
+.roadmap-step div { font-size: 14px; font-weight: 600; }
+.step-arrow { color: var(--border); font-size: 20px; }
+
+/* HEADER & SUMMARY */
+.header { margin-bottom:40px; }
+.kicker { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+h1 { font-size:30px; font-weight:600; margin-bottom:12px; }
+.summary { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:18px; margin-bottom:30px; backdrop-filter: blur(8px); }
+.summary h3 { font-size:14px; margin-bottom:10px; }
+.summary ul { font-size:13.5px; color:var(--muted); padding-left:18px; line-height: 1.8; }
+
+/* PANELS & TABLES */
+.panel { background:var(--panel); border:1px solid var(--border); border-radius:14px; margin-top:30px; overflow:hidden; backdrop-filter: blur(8px); }
+.panel-header { padding:16px 18px; font-weight:600; font-size:15px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+.bar { width:4px; height:16px; border-radius:2px; }
+.pre { background:var(--pre) } .train { background:var(--train) } .post { background:var(--post) }
+
+.table-wrapper { width:100%; overflow-x:auto; }
+.table { width:100%; border-collapse:collapse; min-width:760px; }
+.table th, .table td { padding:14px 16px; font-size:13.5px; text-align:left; }
+.table th { color:var(--muted); font-weight:500; font-size:11px; text-transform:uppercase; letter-spacing:.05em; border-bottom: 1px solid var(--border); }
+.table tr { border-bottom:1px solid var(--border); }
+.table tr:last-child { border-bottom:none; }
+
+.link-btn {
+  display:inline-block; padding:6px 14px; font-size:11px; border-radius:6px; background:var(--bg);
+  color:var(--accent); text-decoration:none; border:1px solid var(--border); transition:all .15s;
+}
+.link-btn:hover { background:var(--accent); color:white; border-color:var(--accent); }
+
+.back-link { display: inline-flex; align-items: center; gap: 5px; text-decoration: none; color: var(--accent); font-size: 13px; margin-bottom: 20px; }
+
+@media(max-width:768px){
+  .roadmap { flex-direction: column; }
+  .step-arrow { transform: rotate(90deg); margin: 5px 0; }
+  .table-wrapper { border-top: 1px solid var(--border); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="theme-switch-wrapper">
+  <label class="theme-switch" for="checkbox">
+    <input type="checkbox" id="checkbox" onclick="toggleTheme()" />
+    <div class="slider"><div class="sun-moon"></div></div>
+  </label>
+  <div id="theme-text">Dark</div>
+</div>
+
+<div class="container">
+  <a href="index.html" class="back-link">← Return to Profile</a>
+
+  <div class="header">
+    <div class="kicker">Case Study · PaySim Audit</div>
+    <h1>Mobile Money Governance Audit</h1>
+    <p class="subtitle">A technical and regulatory risk assessment of automated fraud detection systems across the full model lifecycle.</p>
+    <div style="margin-top:15px; font-size:13px; color:var(--muted);">Auditor: <b>Kwadwo Amponsah</b> · April 2026</div>
+  </div>
+
+  <div class="roadmap">
+    <a href="#pre-training" class="roadmap-step">
+      <h4>Phase 1</h4>
+      <div style="color:var(--pre)">Pre-Training</div>
+    </a>
+    <span class="step-arrow">→</span>
+    <a href="#training" class="roadmap-step">
+      <h4>Phase 2</h4>
+      <div style="color:var(--train)">Training</div>
+    </a>
+    <span class="step-arrow">→</span>
+    <a href="#post-training" class="roadmap-step">
+      <h4>Phase 3</h4>
+      <div style="color:var(--post)">Post-Training</div>
+    </a>
+  </div>
+
+  <div class="summary">
+    <h3>Executive Audit Summary</h3>
+    <ul>
+      <li><strong>Performance:</strong> Robust fraud detection for high-velocity transactions (ROC-AUC 0.94).</li>
+      <li><strong>Bias:</strong> Material disparities detected in balance-based segmentation.</li>
+      <li><strong>Risk Rating:</strong> <span style="color:var(--train)">Medium (Requires Mitigation)</span></li>
+    </ul>
+  </div>
+
+  <div id="pre-training" class="panel">
+    <div class="panel-header"><div class="bar pre"></div>Phase 1 — Pre-Training Governance</div>
+    <div class="table-wrapper">
+      <table class="table">
+        <tr><th>Control</th><th>Description</th><th>Regulation</th><th>Evidence</th></tr>
+        <tr>
+          <td>System Scope</td><td>Inventory & Objective definition</td><td>EU Art.9 · NIST GOV 1.1</td>
+          <td><a class="link-btn" href="https://kwadwoai.github.io/Scope_Paysim/" target="_blank">Review Artifact</a></td>
+        </tr>
+        <tr>
+          <td>Data Integrity</td><td>Integrity & Bias Testing</td><td>EU Art.10 · NIST MAP 2.1</td>
+          <td><a class="link-btn" href="https://kwadwoai.github.io/DEA_Paysim/" target="_blank">Review Artifact</a></td>
+        </tr>
+        <tr>
+          <td>Proxy Detection</td><td>Sensitive attribute masking</td><td>EU Art.10(5)</td>
+          <td><a class="link-btn" href="https://kwadwoai.github.io/Proxy_Paysim/" target="_blank">Review Artifact</a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="training" class="panel">
+    <div class="panel-header"><div class="bar train"></div>Phase 2 — Training & Optimization</div>
+    <div class="table-wrapper">
+      <table class="table">
+        <tr><th>Control</th><th>Description</th><th>Regulation</th><th>Evidence</th></tr>
+        <tr>
+          <td>Model Training</td><td>Algorithm selection & tuning</td><td>NIST MAP 2.0 · CISD §6</td>
+          <td><a class="link-btn" href="https://kwadwoai.github.io/Training_Paysim/" target="_blank">Review Artifact</a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="post-training" class="panel">
+    <div class="panel-header"><div class="bar post"></div>Phase 3 — Post-Training & Assurance</div>
+    <div class="table-wrapper">
+      <table class="table">
+        <tr><th>Control</th><th>Description</th><th>Regulation</th><th>Evidence</th></tr>
+        <tr>
+          <td>Fairness & Bias</td><td>Group-level disparity audit</td><td>EU Art.10(5) · CISD §7</td>
+          <td><a class="link-btn" href="https://kwadwoai.github.io/Fairness_Bias_Paysim/" target="_blank">Review Artifact</a></td>
+        </tr>
+        <tr>
+          <td>Explainability</td><td>Feature importance (SHAP)</td><td>EU Art.13 · NIST MANAGE 1.3</td>
+          <td><a class="link-btn" href="https://kwadwoai.github.io/Explainability_Paysim/" target="_blank">Review Artifact</a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <footer style="margin-top:60px; padding-top:20px; border-top:1px solid var(--border); color:var(--muted); font-size:12px;">
+    ClearBoxAI · Independent Governance & Risk Assurance
+  </footer>
+</div>
+
+<script>
+function toggleTheme() {
+  const isLight = document.body.classList.toggle("light");
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+  document.getElementById("theme-text").innerText = isLight ? "Light" : "Dark";
+}
+
+(function() {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "light") {
+    document.body.classList.add("light");
+    document.getElementById("checkbox").checked = true;
+    document.getElementById("theme-text").innerText = "Light";
+  }
+})();
+</script>
+
+</body>
+</html>
