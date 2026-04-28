@@ -14,7 +14,7 @@
   --text:#e5e7eb;
   --muted:#9ca3af;
   --accent:#2563eb;
-  --glow: rgba(37, 99, 235, 0.12);
+  --glow: rgba(37, 99, 235, 0.15);
 }
 
 body.light{
@@ -24,7 +24,7 @@ body.light{
   --text:#111827;
   --muted:#4b5563;
   --accent:#2563eb;
-  --glow: rgba(37, 99, 235, 0.04);
+  --glow: rgba(37, 99, 235, 0.05);
 }
 
 body {
@@ -32,25 +32,24 @@ body {
   font-family:Inter, sans-serif;
   background: var(--bg);
   background-image: 
-    radial-gradient(at 0% 0%, var(--glow) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, var(--glow) 0px, transparent 50%);
-  background-attachment: fixed;
+    radial-gradient(at 0% 0%, var(--glow) 0px, transparent 40%),
+    radial-gradient(at 100% 100%, var(--glow) 0px, transparent 40%);
   color:var(--text);
   line-height: 1.6;
-  height: 100vh; /* Lock height */
-  overflow: hidden; /* Prevent scrolling */
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden; /* Single page feel */
   transition: background .3s, color .3s;
 }
 
 .container {
-  max-width: 850px;
+  max-width: 900px;
   width: 100%;
   padding: 40px 24px;
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  z-index: 10;
 }
 
 /* THEME TOGGLE */
@@ -61,13 +60,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 100;
 }
 .theme-switch { display: inline-block; height: 28px; position: relative; width: 54px; }
 .theme-switch input { display: none; }
 .slider {
   background: #2b394d; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0;
-  transition: .4s; border-radius: 34px; border: 1px solid var(--border); overflow: hidden;
+  transition: .4s; border-radius: 34px; border: 1px solid var(--border);
 }
 .sun-moon {
   background-color: #f5f3ce; bottom: 3px; height: 20px; left: 28px; position: absolute;
@@ -75,9 +73,8 @@ body {
 }
 input:checked + .slider { background: #a5d1e1; }
 input:checked + .slider .sun-moon { transform: translateX(-24px); background-color: #ffdb00; }
-#theme-text { margin-top: 6px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-/* NAVIGATION */
+/* HEADER & BACK */
 .back {
   display: inline-flex;
   align-items: center;
@@ -87,51 +84,76 @@ input:checked + .slider .sun-moon { transform: translateX(-24px); background-col
   font-weight: 500;
   color: var(--accent);
   text-decoration: none;
-  width: fit-content;
 }
 
-/* HEADER */
-.header { margin-bottom: 30px; }
-.kicker { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
-h1 { font-size: clamp(24px, 5vw, 36px); margin: 0 0 12px 0; font-weight: 600; line-height: 1.1; }
-.subtitle { color: var(--muted); font-size: 15px; max-width: 600px; margin: 0; }
+.header { margin-bottom: 32px; }
+.kicker { font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
+h1 { font-size: clamp(28px, 4vw, 42px); margin: 0 0 16px 0; font-weight: 600; line-height: 1.1; }
+.subtitle { color: var(--muted); font-size: 17px; max-width: 700px; margin: 0; }
 
-/* GRID LAYOUT FOR NO-SCROLL */
-.main-grid {
+/* CONTENT GRID */
+.grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
+  margin-bottom: 40px;
 }
-
-.section-title { font-size: 14px; margin-bottom: 12px; font-weight: 600; border-left: 3px solid var(--accent); padding-left: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 
 .box {
   background: var(--panel);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 20px;
-  height: 100%;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.box-title { 
+  font-size: 13px; 
+  text-transform: uppercase; 
+  letter-spacing: 1px; 
+  color: var(--accent); 
+  font-weight: 700; 
+  margin-bottom: 16px; 
+  display: block;
 }
 
 .list { padding: 0; margin: 0; list-style: none; }
-.list li { position: relative; padding-left: 20px; margin-bottom: 10px; font-size: 13.5px; line-height: 1.4; }
+.list li { position: relative; padding-left: 24px; margin-bottom: 12px; font-size: 14px; }
 .list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
 
-.tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-.tag { padding: 5px 10px; font-size: 10px; font-weight: 700; border-radius: 5px; background: var(--border); border: 1px solid var(--border); opacity: 0.9; }
-
-.cta { margin-top: 30px; }
-.btn {
-  display: inline-block; padding: 14px 28px; font-size: 14px; font-weight: 600; background: var(--accent);
-  color: white; border-radius: 8px; text-decoration: none; transition: transform 0.2s;
+/* HIGH NOTICABILITY CTA */
+.cta-area { 
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4); }
 
-@media(max-width:768px) { 
-  body { height: auto; overflow: visible; padding: 40px 0; }
-  .main-grid { grid-template-columns: 1fr; }
-  .container { padding: 20px; }
+.btn-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 40px;
+  font-size: 15px;
+  font-weight: 600;
+  background: var(--accent);
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.5);
+}
+
+.btn-main:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.6);
+  filter: brightness(1.1);
+}
+
+@media(max-width:768px) {
+  body { overflow: auto; align-items: flex-start; }
+  .grid { grid-template-columns: 1fr; }
+  .container { padding-top: 80px; }
+  .btn-main { width: 100%; justify-content: center; }
 }
 </style>
 </head>
@@ -143,54 +165,44 @@ h1 { font-size: clamp(24px, 5vw, 36px); margin: 0 0 12px 0; font-weight: 600; li
     <input type="checkbox" id="checkbox" onclick="toggleTheme()" />
     <div class="slider"><div class="sun-moon"></div></div>
   </label>
-  <div id="theme-text">Dark</div>
 </div>
 
 <div class="container">
   <a class="back" href="index.html">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
     Return to Profile
   </a>
 
   <div class="header">
-    <div class="kicker">Case Study: Model Risk Audit</div>
-    <h1>Mobile Money Fraud Detection</h1>
-    <p class="subtitle">Technical deep-dive into bias, explainability, and regulatory alignment for emerging market financial systems.</p>
+    <div class="kicker">Model Risk & Compliance</div>
+    <h1>Fraud Detection Audit Log</h1>
+    <p class="subtitle">A technical investigation into model fairness, explainability, and regulatory alignment for high-stakes financial systems.</p>
   </div>
 
-  <div class="main-grid">
-    <div class="column">
-      <div class="section-title">Scope & Governance</div>
-      <div class="box">
-        <div class="tags">
-          <span class="tag">NIST AI RMF</span>
-          <span class="tag">EU AI ACT</span>
-          <span class="tag">BOG CISD</span>
-        </div>
-        <ul class="list">
-          <li><strong>Lifecycle:</strong> Data ingestion to model retirement.</li>
-          <li><strong>Fairness:</strong> Demographic Parity & Equalized Odds.</li>
-          <li><strong>Explainability:</strong> SHAP-based feature mapping.</li>
-          <li><strong>Standards:</strong> Regulatory compliance verification.</li>
-        </ul>
-      </div>
+  <div class="grid">
+    <div class="box">
+      <span class="box-title">Audit Scope</span>
+      <ul class="list">
+        <li><strong>NIST Framework:</strong> Full lifecycle governance mapping.</li>
+        <li><strong>Fairness:</strong> Testing for group-based disparity.</li>
+        <li><strong>Explainability:</strong> Post-hoc SHAP interpretations.</li>
+      </ul>
     </div>
-
-    <div class="column">
-      <div class="section-title">Key Audit Insights</div>
-      <div class="box">
-        <ul class="list">
-          <li><strong>Performance:</strong> ROC-AUC 0.94 on velocity flags.</li>
-          <li><strong>Bias:</strong> Discovered in balance-dependent features.</li>
-          <li><strong>Risk Level:</strong> Classified as <strong>Material</strong>.</li>
-          <li><strong>Impact:</strong> Financial weight of False Positives.</li>
-        </ul>
-      </div>
+    <div class="box">
+      <span class="box-title">Risk Assessment</span>
+      <ul class="list">
+        <li><strong>ROC-AUC:</strong> 0.94 efficiency benchmark.</li>
+        <li><strong>Bias:</strong> Balance-dependent feature risk found.</li>
+        <li><strong>Rating:</strong> Risk classified as <strong>Material</strong>.</li>
+      </ul>
     </div>
   </div>
 
-  <div class="cta">
-    <a class="btn" href="fraud_audit_documentation.html">Access Full Documentation →</a>
+  <div class="cta-area">
+    <a class="btn-main" href="fraud_audit_documentation.html">
+      View Full Documentation
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </a>
   </div>
 </div>
 
@@ -198,15 +210,13 @@ h1 { font-size: clamp(24px, 5vw, 36px); margin: 0 0 12px 0; font-weight: 600; li
 function toggleTheme() {
   const isLight = document.body.classList.toggle("light");
   localStorage.setItem("theme", isLight ? "light" : "dark");
-  document.getElementById("theme-text").innerText = isLight ? "Light" : "Dark";
 }
 
 (function() {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "light") {
     document.body.classList.add("light");
-    if(document.getElementById("checkbox")) document.getElementById("checkbox").checked = true;
-    document.getElementById("theme-text").innerText = "Light";
+    document.getElementById("checkbox").checked = true;
   }
 })();
 </script>
