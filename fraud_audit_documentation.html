@@ -14,9 +14,9 @@
   --text:#e5e7eb;
   --muted:#9ca3af;
   --accent:#3b82f6; 
-  --pre:#db2777;
-  --train:#f59e0b;
-  --post:#10b981;
+  --pre:#db2777;   /* Pink */
+  --train:#f59e0b; /* Amber */
+  --post:#10b981;  /* Green */
 }
 
 body.light{
@@ -31,7 +31,7 @@ body.light{
 html { scroll-behavior: smooth; }
 body { font-family:Inter, sans-serif; background: var(--bg); color:var(--text); margin:0; transition: background .3s, color .3s; line-height: 1.5; }
 
-/* TOP NAVIGATION */
+/* NAVIGATION */
 .nav-bar { position: sticky; top: 0; background: var(--bg); border-bottom: 1px solid var(--border); padding: 15px 0; z-index: 1000; backdrop-filter: blur(10px); }
 .nav-content { max-width: 1000px; margin: auto; padding: 0 24px; display: flex; gap: 24px; }
 .nav-link { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: var(--accent); font-size: 13px; font-weight: 500; }
@@ -59,7 +59,7 @@ h1 { font-size:32px; font-weight:600; margin: 0; letter-spacing: -0.02em; }
 .roadmap-box h4 { margin: 0; font-size: 10px; text-transform: uppercase; color: var(--muted); }
 .roadmap-box div { font-weight: 600; font-size: 14px; margin-top: 4px; }
 
-/* TABLE TO CARD CONVERSION */
+/* TABLE LOGIC */
 .phase-section { margin-top: 50px; scroll-margin-top: 100px; }
 .phase-header { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; margin-bottom: 20px; }
 .dot { width: 8px; height: 8px; border-radius: 50%; }
@@ -69,40 +69,28 @@ h1 { font-size:32px; font-weight:600; margin: 0; letter-spacing: -0.02em; }
 .table th { background: rgba(0,0,0,0.02); color:var(--muted); font-size:11px; text-transform:uppercase; padding: 14px 20px; border-bottom: 1px solid var(--border); }
 .table td { padding: 16px 20px; font-size: 13.5px; border-bottom: 1px solid var(--border); }
 
-/* BUTTONS */
+/* MOBILE REFINEMENTS */
 .link-btn {
   display:inline-block; width: 100%; text-align: center; box-sizing: border-box;
   padding: 10px; font-size: 12px; border-radius: 6px; 
   background: var(--accent); color: white; text-decoration: none; font-weight: 600;
-  transition: opacity 0.2s;
 }
 
-/* MOBILE OPTIMIZATION OVERRIDE */
 @media (max-width: 768px) {
   .roadmap { flex-direction: column; }
-  h1 { font-size: 24px; }
-  
-  /* Force table to behave like blocks */
   .table, .table thead, .table tbody, .table th, .table td, .table tr { display: block; }
-  .table thead { display: none; } /* Hide headers on mobile */
-  
+  .table thead { display: none; }
   .table tr { padding: 20px; border-bottom: 1px solid var(--border); }
-  .table td { border: none; padding: 0 0 10px 0; position: relative; }
-  
-  /* Create Labels for Mobile */
+  .table td { border: none; padding: 0 0 10px 0; }
   .table td::before { 
-    content: attr(data-label); 
-    display: block; font-size: 10px; text-transform: uppercase; 
-    color: var(--muted); font-weight: 600; margin-bottom: 2px;
+    content: attr(data-label); display: block; font-size: 10px; 
+    text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 2px;
   }
-  
   .table td:last-child { padding-top: 10px; padding-bottom: 0; }
-  .link-btn { padding: 12px; font-size: 14px; } /* Bigger touch target */
 }
 
-/* Desktop Button fix - keeps it small in table view */
 @media (min-width: 769px) {
-  .link-btn { width: auto; padding: 6px 16px; background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+  .link-btn { width: auto; padding: 6px 16px; background: transparent; color: var(--accent); border: 1.5px solid var(--accent); transition: 0.2s; }
   .link-btn:hover { background: var(--accent); color: white; }
 }
 </style>
@@ -113,7 +101,7 @@ h1 { font-size:32px; font-weight:600; margin: 0; letter-spacing: -0.02em; }
 <nav class="nav-bar">
   <div class="nav-content">
     <a href="index.html" class="nav-link">Home</a>
-    <a href="fraud-audit.html" class="nav-link">Back</a>
+    <a href="index.html" class="nav-link">Back</a>
   </div>
 </nav>
 
@@ -127,7 +115,7 @@ h1 { font-size:32px; font-weight:600; margin: 0; letter-spacing: -0.02em; }
 <div class="container">
   <div class="header">
     <h1>Mobile Money Audit Log</h1>
-    <div class="meta">Auditor: <b>Kwadwo Amponsah</b> · PaySim Risk Assessment</div>
+    <div class="meta">Lead Auditor: <b>Kwadwo Amponsah</b> · April 2026</div>
   </div>
 
   <div class="roadmap">
@@ -144,28 +132,98 @@ h1 { font-size:32px; font-weight:600; margin: 0; letter-spacing: -0.02em; }
         <tbody>
           <tr>
             <td data-label="Control">System Scope</td>
-            <td data-label="Description">Inventory & Objective definition</td>
+            <td data-label="Description">Objective definition</td>
             <td data-label="Standard">EU Art.9</td>
             <td data-label="Artifact"><a class="link-btn" href="https://kwadwoai.github.io/Scope_Paysim/">View Artifact</a></td>
           </tr>
           <tr>
             <td data-label="Control">Env. Setup</td>
-            <td data-label="Description">Secure sandbox configuration</td>
+            <td data-label="Description">Secure sandbox config</td>
             <td data-label="Standard">CISD §4.1</td>
             <td data-label="Artifact"><a class="link-btn" href="https://kwadwoai.github.io/Environment_Setup_Paysim/">View Artifact</a></td>
           </tr>
           <tr>
             <td data-label="Control">Data Integrity</td>
-            <td data-label="Description">Quality & Bias testing</td>
+            <td data-label="Description">Bias testing</td>
             <td data-label="Standard">NIST MAP 2.1</td>
             <td data-label="Artifact"><a class="link-btn" href="https://kwadwoai.github.io/DEA_Paysim/">View Artifact</a></td>
+          </tr>
+          <tr>
+            <td data-label="Control">Proxy Detection</td>
+            <td data-label="Description">Feature masking</td>
+            <td data-label="Standard">EU Art.10(5)</td>
+            <td data-label="Artifact"><a class="link-btn" href="https://kwadwoai.github.io/Proxy_Paysim/">View Artifact</a></td>
+          </tr>
+          <tr>
+            <td data-label="Control">E.D.A</td>
+            <td data-label="Description">Exploratory Analysis</td>
+            <td data-label="Standard">NIST MAP 1.1</td>
+            <td data-label="Artifact"><a class="link-btn" href="https://kwadwoai.github.io/EDA_PaySim/">View Artifact</a></td>
+          </tr>
+          <tr>
+            <td data-label="Control">Feature Eng.</td>
+            <td data-label="Description">Constraint construction</td>
+            <td data-label="Standard">NIST MAP 2.2</td>
+            <td data-label="Artifact"><a class="link-btn" href="https://kwadwoai.github.io/FE_Paysim/">View Artifact</a></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <footer style="margin-top:60px; text-align:center; color:var(--muted); font-size:12px;">ClearBoxAI · 2026</footer>
+  <div id="phase2" class="phase-section">
+    <div class="phase-header"><div class="dot" style="background:var(--train)"></div> Phase 2: Training</div>
+    <div class="table-wrapper">
+      <table class="table">
+        <thead><tr><th>Control</th><th>Description</th><th>Standard</th><th>Artifact</th></tr></thead>
+        <tbody>
+          <tr>
+            <td data-label="Control">Model Training</td>
+            <td data-label="Description">Algorithm selection</td>
+            <td data-label="Standard">CISD §6</td>
+            <td data-label="Artifact"><a class="link-btn" href="https://kwadwoai.github.io/Training_Paysim/">View Artifact</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="phase3" class="phase-section">
+    <div class="phase-header"><div class="dot" style="background:var(--post)"></div> Phase 3: Post-Training</div>
+    <div class="table-wrapper">
+      <table class="table">
+        <thead><tr><th>Control</th><th>Description</th><th>Standard</th><th>Artifact</th></tr></thead>
+        <tbody>
+          <tr>
+            <td data-label="Control">Performance</td>
+            <td data-label="Description">Metrics Audit</td>
+            <td data-label="Standard">NIST MEASURE</td>
+            <td data-label="Artifact"><a class="link-btn" href="https://kwadwoai.github.io/PeformEval_Paysim/">View Artifact</a></td>
+          </tr>
+          <tr>
+            <td data-label="Control">Fairness & Bias</td>
+            <td data-label="Description">Disparity analysis</td>
+            <td data-label="Standard">EU Art.10</td>
+            <td data-label="Artifact"><a class="link-btn" href="https://kwadwoai.github.io/Fairness_Bias_Paysim/">View Artifact</a></td>
+          </tr>
+          <tr>
+            <td data-label="Control">Error Analysis</td>
+            <td data-label="Description">Financial impact</td>
+            <td data-label="Standard">NIST MEASURE</td>
+            <td data-label="Artifact"><a class="link-btn" href="https://kwadwoai.github.io/Error_FP_FN_Paysim/">View Artifact</a></td>
+          </tr>
+          <tr>
+            <td data-label="Control">Explainability</td>
+            <td data-label="Description">SHAP Interpretability</td>
+            <td data-label="Standard">EU Art.13</td>
+            <td data-label="Artifact"><a class="link-btn" href="https://kwadwoai.github.io/Explainability_Paysim/">View Artifact</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer style="margin-top:80px; text-align:center; color:var(--muted); font-size:12px;">ClearBoxAI · Independent Risk Assurance</footer>
 </div>
 
 <script>
