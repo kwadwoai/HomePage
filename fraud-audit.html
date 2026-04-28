@@ -37,17 +37,23 @@ body {
   background-attachment: fixed;
   color:var(--text);
   line-height: 1.6;
-  min-height: 100vh;
+  height: 100vh; /* Lock height */
+  overflow: hidden; /* Prevent scrolling */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: background .3s, color .3s;
 }
 
 .container {
-  max-width: 800px;
-  margin: auto;
-  padding: 60px 24px;
+  max-width: 850px;
+  width: 100%;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
 }
 
-/* THEME TOGGLE (SAME AS INDEX) */
+/* THEME TOGGLE */
 .theme-switch-wrapper {
   position: fixed;
   top: 20px;
@@ -63,58 +69,70 @@ body {
   background: #2b394d; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0;
   transition: .4s; border-radius: 34px; border: 1px solid var(--border); overflow: hidden;
 }
-.slider:before { content: "★"; position: absolute; color: rgba(255,255,255,0.3); font-size: 8px; top: 4px; left: 12px; }
 .sun-moon {
   background-color: #f5f3ce; bottom: 3px; height: 20px; left: 28px; position: absolute;
-  transition: .4s; width: 20px; border-radius: 50%; box-shadow: inset -3px -2px 0 0px #d1d0b5;
+  transition: .4s; width: 20px; border-radius: 50%;
 }
 input:checked + .slider { background: #a5d1e1; }
-input:checked + .slider:before { content: ""; }
-input:checked + .slider .sun-moon { transform: translateX(-24px); background-color: #ffdb00; box-shadow: 0 0 10px #ffdb00; }
+input:checked + .slider .sun-moon { transform: translateX(-24px); background-color: #ffdb00; }
 #theme-text { margin-top: 6px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-/* BACK LINK */
+/* NAVIGATION */
 .back {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
   font-size: 13px;
   font-weight: 500;
   color: var(--accent);
   text-decoration: none;
+  width: fit-content;
 }
 
-/* HEADER & SECTIONS */
-.header { margin-bottom: 40px; }
-.kicker { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-weight: 600; }
-h1 { font-size: 32px; margin: 0 0 16px 0; font-weight: 600; line-height: 1.2; }
-.subtitle { color: var(--muted); font-size: 16px; max-width: 650px; }
-.section { margin-top: 40px; }
-h3 { font-size: 18px; margin-bottom: 16px; font-weight: 600; border-left: 3px solid var(--accent); padding-left: 12px; }
+/* HEADER */
+.header { margin-bottom: 30px; }
+.kicker { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
+h1 { font-size: clamp(24px, 5vw, 36px); margin: 0 0 12px 0; font-weight: 600; line-height: 1.1; }
+.subtitle { color: var(--muted); font-size: 15px; max-width: 600px; margin: 0; }
+
+/* GRID LAYOUT FOR NO-SCROLL */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 20px;
+}
+
+.section-title { font-size: 14px; margin-bottom: 12px; font-weight: 600; border-left: 3px solid var(--accent); padding-left: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 
 .box {
   background: var(--panel);
   backdrop-filter: blur(12px);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 24px;
+  padding: 20px;
+  height: 100%;
 }
 
 .list { padding: 0; margin: 0; list-style: none; }
-.list li { position: relative; padding-left: 24px; margin-bottom: 12px; font-size: 14px; }
+.list li { position: relative; padding-left: 20px; margin-bottom: 10px; font-size: 13.5px; line-height: 1.4; }
 .list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
 
-.tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
-.tag { padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 6px; background: var(--border); border: 1px solid var(--border); }
+.tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.tag { padding: 5px 10px; font-size: 10px; font-weight: 700; border-radius: 5px; background: var(--border); border: 1px solid var(--border); opacity: 0.9; }
 
-.cta { text-align: center; margin-top: 60px; }
+.cta { margin-top: 30px; }
 .btn {
-  display: inline-block; padding: 16px 32px; font-size: 14px; font-weight: 600; background: var(--accent);
-  color: white; border-radius: 10px; text-decoration: none;
+  display: inline-block; padding: 14px 28px; font-size: 14px; font-weight: 600; background: var(--accent);
+  color: white; border-radius: 8px; text-decoration: none; transition: transform 0.2s;
 }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4); }
 
-@media(max-width:600px) { h1 { font-size: 26px; } }
+@media(max-width:768px) { 
+  body { height: auto; overflow: visible; padding: 40px 0; }
+  .main-grid { grid-template-columns: 1fr; }
+  .container { padding: 20px; }
+}
 </style>
 </head>
 
@@ -136,45 +154,44 @@ h3 { font-size: 18px; margin-bottom: 16px; font-weight: 600; border-left: 3px so
 
   <div class="header">
     <div class="kicker">Case Study: Model Risk Audit</div>
-    <h1>Mobile Money Fraud Detection Audit</h1>
-    <p class="subtitle">A technical deep-dive into bias, explainability, and regulatory alignment for financial systems.</p>
+    <h1>Mobile Money Fraud Detection</h1>
+    <p class="subtitle">Technical deep-dive into bias, explainability, and regulatory alignment for emerging market financial systems.</p>
   </div>
 
-  <div class="section">
-    <h3>Scope of Engagement</h3>
-    <div class="box">
-      <ul class="list">
-        <li><strong>Lifecycle Governance:</strong> Data ingestion to model retirement.</li>
-        <li><strong>Fairness Metrics:</strong> Demographic Parity and Equalized Odds.</li>
-        <li><strong>Explainability:</strong> SHAP-based feature importance mapping.</li>
-        <li><strong>Error Analysis:</strong> Financial impact of False Positives.</li>
-      </ul>
+  <div class="main-grid">
+    <div class="column">
+      <div class="section-title">Scope & Governance</div>
+      <div class="box">
+        <div class="tags">
+          <span class="tag">NIST AI RMF</span>
+          <span class="tag">EU AI ACT</span>
+          <span class="tag">BOG CISD</span>
+        </div>
+        <ul class="list">
+          <li><strong>Lifecycle:</strong> Data ingestion to model retirement.</li>
+          <li><strong>Fairness:</strong> Demographic Parity & Equalized Odds.</li>
+          <li><strong>Explainability:</strong> SHAP-based feature mapping.</li>
+          <li><strong>Standards:</strong> Regulatory compliance verification.</li>
+        </ul>
+      </div>
     </div>
-  </div>
 
-  <div class="section">
-    <h3>Governance Frameworks</h3>
-    <div class="tags">
-      <span class="tag">NIST AI RMF 1.0</span>
-      <span class="tag">EU AI ACT</span>
-      <span class="tag">BANK OF GHANA CISD</span>
-    </div>
-  </div>
-
-  <div class="section">
-    <h3>Key Insights</h3>
-    <div class="box">
-      <ul class="list">
-        <li>Strong performance on velocity indicators (ROC-AUC 0.94).</li>
-        <li>Bias observed in balance-dependent behavioral features.</li>
-        <li>Fairness risk classified as <strong>Material</strong>.</li>
-      </ul>
+    <div class="column">
+      <div class="section-title">Key Audit Insights</div>
+      <div class="box">
+        <ul class="list">
+          <li><strong>Performance:</strong> ROC-AUC 0.94 on velocity flags.</li>
+          <li><strong>Bias:</strong> Discovered in balance-dependent features.</li>
+          <li><strong>Risk Level:</strong> Classified as <strong>Material</strong>.</li>
+          <li><strong>Impact:</strong> Financial weight of False Positives.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
   <div class="cta">
-  <a class="btn" href="fraud_audit_documentation.html">Access Full Documentation →</a>
-</div>
+    <a class="btn" href="fraud_audit_documentation.html">Access Full Documentation →</a>
+  </div>
 </div>
 
 <script>
@@ -188,7 +205,7 @@ function toggleTheme() {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "light") {
     document.body.classList.add("light");
-    document.getElementById("checkbox").checked = true;
+    if(document.getElementById("checkbox")) document.getElementById("checkbox").checked = true;
     document.getElementById("theme-text").innerText = "Light";
   }
 })();
