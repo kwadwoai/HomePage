@@ -13,7 +13,7 @@
   --border:#1f2937;
   --text:#e5e7eb;
   --muted:#9ca3af;
-  --accent:#2563eb; 
+  --accent:#3b82f6; 
   --pre:#db2777; /* Pink Phase */
   --train:#f59e0b;
   --post:#10b981;
@@ -28,7 +28,7 @@ body.light{
   --accent:#2563eb;
 }
 
-html { scroll-behavior: smooth; } /* Enables the smooth "jump" effect */
+html { scroll-behavior: smooth; }
 
 body {
   font-family:Inter, sans-serif;
@@ -60,14 +60,14 @@ h1 { font-size:32px; font-weight:600; margin: 0 0 10px 0; letter-spacing: -0.02e
 .roadmap-box { 
   flex: 1; padding: 20px; border-radius: 12px; background: var(--panel); 
   border: 1px solid var(--border); text-align: center; 
-  text-decoration: none; color: inherit; transition: transform 0.2s ease;
+  text-decoration: none; color: inherit; transition: transform 0.2s ease, border-color 0.2s ease;
 }
-.roadmap-box:hover { transform: translateY(-3px); border-color: var(--muted); }
+.roadmap-box:hover { transform: translateY(-3px); border-color: var(--accent); }
 .roadmap-box h4 { margin: 0 0 5px 0; font-size: 11px; text-transform: uppercase; color: var(--muted); }
 .roadmap-box div { font-weight: 600; font-size: 15px; }
 
 /* TABLES */
-.phase-section { margin-top: 60px; scroll-margin-top: 80px; } /* scroll-margin prevents header overlap */
+.phase-section { margin-top: 60px; scroll-margin-top: 80px; }
 .phase-header { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; margin-bottom: 15px; }
 .dot { width: 8px; height: 8px; border-radius: 50%; }
 
@@ -77,13 +77,18 @@ h1 { font-size:32px; font-weight:600; margin: 0 0 10px 0; letter-spacing: -0.02e
 .table td { padding: 16px 20px; font-size: 13.5px; border-bottom: 1px solid var(--border); }
 .table tr:last-child td { border-bottom: none; }
 
-/* BUTTONS */
+/* REFINED GHOST BUTTONS */
 .link-btn {
-  display:inline-block; padding:8px 20px; font-size:12px; border-radius:6px; 
-  background:var(--accent); color:white; text-decoration:none; font-weight: 600;
-  transition: 0.2s ease; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  display:inline-block; padding:6px 18px; font-size:12px; border-radius:6px; 
+  background: transparent; color:var(--accent); text-decoration:none; font-weight: 600;
+  border: 1.5px solid var(--accent);
+  transition: all 0.2s ease;
 }
-.link-btn:hover { filter: brightness(1.1); box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3); }
+.link-btn:hover { 
+  background: var(--accent); 
+  color: white; 
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
 
 @media(max-width:768px){
   .roadmap { flex-direction: column; }
