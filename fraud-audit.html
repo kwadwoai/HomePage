@@ -1,1 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fraud Detection Audit · Overview</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<style>
+:root{
+  --bg:#0b1220;
+  --panel:#111827;
+  --border:#1f2937;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --accent:#2563eb;
+}
+
+body{
+  margin:0;
+  font-family:Inter, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:60px 24px;
+}
+
+/* HEADER */
+.header{
+  margin-bottom:30px;
+}
+
+.kicker{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+
+h1{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.subtitle{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+  max-width:700px;
+}
+
+/* SECTION */
+.section{
+  margin-top:30px;
+}
+
+.section h3{
+  font-size:15px;
+  margin-bottom:10px;
+}
+
+.section p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* BOX */
+.box{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:18px;
+  margin-top:20px;
+}
+
+/* LIST */
+.list{
+  padding-left:18px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.8;
+}
+
+/* TAGS */
+.tags{
+  margin-top:10px;
+}
+
+.tag{
+  display:inline-block;
+  padding:5px 8px;
+  font-size:11px;
+  border-radius:6px;
+  background:#1f2937;
+  margin:4px 4px 0 0;
+}
+
+/* CTA */
+.cta{
+  text-align:center;
+  margin-top:50px;
+}
+
+.btn{
+  display:inline-block;
+  padding:14px 22px;
+  font-size:14px;
+  background:var(--accent);
+  color:white;
+  border-radius:10px;
+  text-decoration:none;
+}
+
+.btn:hover{
+  background:#1d4ed8;
+}
+
+/* BACK LINK */
+.back{
+  margin-bottom:30px;
+  display:inline-block;
+  font-size:13px;
+  color:var(--muted);
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <a class="back" href="index.html">← Back to Home</a>
+
+  <div class="header">
+    <div class="kicker">Audit Overview</div>
+
+    <h1>Fraud Detection AI Model Audit</h1>
+
+    <p class="subtitle">
+      Independent governance and risk evaluation of a digital payments fraud detection system,
+      assessing model behavior, bias, and regulatory alignment across its full lifecycle.
+    </p>
+  </div>
+
+  <!-- WHAT THIS AUDIT DOES -->
+  <div class="section">
+    <h3>What This Audit Covers</h3>
+    <p>
+      This audit evaluates the integrity and reliability of a machine learning fraud detection model,
+      focusing on how decisions are made, where risks exist, and whether outcomes are fair across users.
+    </p>
+
+    <div class="box">
+      <ul class="list">
+        <li>End-to-end lifecycle assessment (pre-training → post-training)</li>
+        <li>Bias and fairness risk detection across user segments</li>
+        <li>False positive / false negative impact analysis</li>
+        <li>Model explainability using SHAP-based interpretation</li>
+        <li>Regulatory compliance mapping and risk classification</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FRAMEWORKS -->
+  <div class="section">
+    <h3>Regulatory & Governance Frameworks</h3>
+    <p>
+      The audit is aligned with internationally recognized AI governance standards
+      and local regulatory expectations.
+    </p>
+
+    <div class="tags">
+      <span class="tag">NIST AI RMF</span>
+      <span class="tag">EU AI Act</span>
+      <span class="tag">Bank of Ghana CISD</span>
+    </div>
+  </div>
+
+  <!-- KEY FINDINGS -->
+  <div class="section">
+    <h3>Key Findings</h3>
+
+    <div class="box">
+      <ul class="list">
+        <li>Strong fraud detection capability across high-value transactions</li>
+        <li>Elevated false positives in mid-balance users</li>
+        <li>Bias linked to balance-based behavioral features</li>
+        <li>Fairness risk classified as <b>material</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <a class="btn" href="YOUR_FULL_AUDIT_PAGE_LINK_HERE" target="_blank">
+      View Full Audit →
+    </a>
+  </div>
+
+</div>
+
+</body>
+</html>
