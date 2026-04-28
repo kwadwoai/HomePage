@@ -53,15 +53,29 @@ input:checked + .slider .sun-moon { transform: translateX(-20px); background-col
 h1 { font-size:32px; font-weight:600; margin: 0; letter-spacing: -0.02em; }
 .meta { font-size:14px; color:var(--muted); margin-top:8px; }
 
-/* ROADMAP - COLOR FIXES */
+/* ROADMAP - INTERACTIVE & COLOR CODED */
 .roadmap { display: flex; gap: 12px; margin: 30px 0; }
-.roadmap-box { flex: 1; padding: 16px; border-radius: 12px; background: var(--panel); border: 1px solid var(--border); text-align: center; text-decoration: none; color: inherit; transition: 0.2s; }
-.roadmap-box:hover { transform: translateY(-2px); }
+.roadmap-box { 
+  flex: 1; padding: 16px; border-radius: 12px; background: var(--panel); 
+  border: 1px solid var(--border); text-align: center; text-decoration: none; 
+  transition: transform 0.2s, background 0.2s, border-color 0.2s; 
+  outline: none;
+}
+.roadmap-box:hover { transform: translateY(-3px); }
 .roadmap-box h4 { margin: 0; font-size: 10px; text-transform: uppercase; color: var(--muted); }
 .roadmap-box div { font-weight: 600; font-size: 14px; margin-top: 4px; }
 
-/* Remove blue highlight on click/active */
-.roadmap-box:active, .roadmap-box:focus { color: inherit; }
+/* Phase 1 (Pre) Specific Highlights */
+.box-pre { border-top: 4px solid var(--pre); color: var(--pre); }
+.box-pre:hover, .box-pre:active { border-color: var(--pre); background: rgba(219, 39, 119, 0.1); }
+
+/* Phase 2 (Train) Specific Highlights */
+.box-train { border-top: 4px solid var(--train); color: var(--train); }
+.box-train:hover, .box-train:active { border-color: var(--train); background: rgba(245, 158, 11, 0.1); }
+
+/* Phase 3 (Post) Specific Highlights */
+.box-post { border-top: 4px solid var(--post); color: var(--post); }
+.box-post:hover, .box-post:active { border-color: var(--post); background: rgba(16, 185, 129, 0.1); }
 
 /* PHASE SECTIONS */
 .phase-section { margin-top: 50px; scroll-margin-top: 100px; }
@@ -128,15 +142,15 @@ h1 { font-size:32px; font-weight:600; margin: 0; letter-spacing: -0.02em; }
   </div>
 
   <div class="roadmap">
-    <a href="#phase1" class="roadmap-box" style="border-top: 4px solid var(--pre); color: var(--pre);">
+    <a href="#phase1" class="roadmap-box box-pre">
       <h4>Phase 1</h4>
       <div>Pre-Training</div>
     </a>
-    <a href="#phase2" class="roadmap-box" style="border-top: 4px solid var(--train); color: var(--train);">
+    <a href="#phase2" class="roadmap-box box-train">
       <h4>Phase 2</h4>
       <div>Training</div>
     </a>
-    <a href="#phase3" class="roadmap-box" style="border-top: 4px solid var(--post); color: var(--post);">
+    <a href="#phase3" class="roadmap-box box-post">
       <h4>Phase 3</h4>
       <div>Post-Training</div>
     </a>
