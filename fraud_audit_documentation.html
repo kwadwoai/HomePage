@@ -38,10 +38,42 @@ body {
   line-height: 1.5;
 }
 
-.container { max-width:1000px; margin:auto; padding:60px 24px; }
+/* TOP NAVIGATION BAR */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 15px 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.nav-content {
+  max-width: 1000px;
+  margin: auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 24px;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.nav-link:hover { opacity: 0.7; }
+
+.container { max-width:1000px; margin:auto; padding:40px 24px 80px; }
 
 /* THEME TOGGLE */
-.theme-switch-wrapper { position: fixed; top: 20px; right: 20px; display: flex; flex-direction: column; align-items: center; z-index: 100; }
+.theme-switch-wrapper { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; align-items: center; z-index: 100; }
 .theme-switch { display: inline-block; height: 24px; position: relative; width: 45px; }
 .theme-switch input { display: none; }
 .slider { background: #374151; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; border: 1px solid var(--border); }
@@ -50,8 +82,7 @@ input:checked + .slider { background: #60a5fa; }
 input:checked + .slider .sun-moon { transform: translateX(-20px); background-color: #fbbf24; }
 
 /* HEADER */
-.header { margin-bottom: 40px; }
-.back-link { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: var(--accent); font-size: 13px; margin-bottom: 20px; font-weight: 500; }
+.header { margin-top: 20px; margin-bottom: 40px; }
 h1 { font-size:32px; font-weight:600; margin: 0 0 10px 0; letter-spacing: -0.02em; }
 .meta { font-size:14px; color:var(--muted); }
 
@@ -63,7 +94,6 @@ h1 { font-size:32px; font-weight:600; margin: 0 0 10px 0; letter-spacing: -0.02e
   text-decoration: none; color: inherit; transition: all 0.2s ease;
 }
 .roadmap-box:hover { transform: translateY(-3px); }
-/* Hover behaviors specific to phase colors */
 .box-pre:hover { border-color: var(--pre); box-shadow: 0 5px 15px -5px rgba(219, 39, 119, 0.3); }
 .box-train:hover { border-color: var(--train); box-shadow: 0 5px 15px -5px rgba(245, 158, 11, 0.3); }
 .box-post:hover { border-color: var(--post); box-shadow: 0 5px 15px -5px rgba(16, 185, 129, 0.3); }
@@ -72,7 +102,7 @@ h1 { font-size:32px; font-weight:600; margin: 0 0 10px 0; letter-spacing: -0.02e
 .roadmap-box div { font-weight: 600; font-size: 15px; }
 
 /* TABLES */
-.phase-section { margin-top: 60px; scroll-margin-top: 80px; }
+.phase-section { margin-top: 60px; scroll-margin-top: 100px; }
 .phase-header { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; margin-bottom: 15px; }
 .dot { width: 8px; height: 8px; border-radius: 50%; }
 
@@ -104,6 +134,19 @@ h1 { font-size:32px; font-weight:600; margin: 0 0 10px 0; letter-spacing: -0.02e
 
 <body>
 
+<nav class="nav-bar">
+  <div class="nav-content">
+    <a href="index.html" class="nav-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      Home
+    </a>
+    <a href="fraud-audit.html" class="nav-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back
+    </a>
+  </div>
+</nav>
+
 <div class="theme-switch-wrapper">
   <label class="theme-switch" for="checkbox">
     <input type="checkbox" id="checkbox" onclick="toggleTheme()" />
@@ -112,8 +155,6 @@ h1 { font-size:32px; font-weight:600; margin: 0 0 10px 0; letter-spacing: -0.02e
 </div>
 
 <div class="container">
-  <a href="index.html" class="back-link">← Back to Profile</a>
-
   <div class="header">
     <h1>Mobile Money Audit Log</h1>
     <div class="meta">System: <b>PaySim Fraud Detection</b> · Lead: <b>Kwadwo Amponsah</b></div>
