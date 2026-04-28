@@ -15,6 +15,7 @@
   --text:#e5e7eb;
   --muted:#9ca3af;
   --accent:#2563eb;
+  --toggle-bg: #1e293b;
 }
 
 body.light{
@@ -24,6 +25,7 @@ body.light{
   --text:#111827;
   --muted:#6b7280;
   --accent:#2563eb;
+  --toggle-bg: #83b4c1;
 }
 
 body{
@@ -31,7 +33,7 @@ body{
   font-family:Inter, sans-serif;
   background:var(--bg);
   color:var(--text);
-  transition:background .2s, color .2s;
+  transition:background .3s, color .3s;
 }
 
 .container{
@@ -40,17 +42,77 @@ body{
   padding:70px 24px;
 }
 
-/* TOGGLE */
-.toggle{
-  position:fixed;
-  top:20px;
-  right:20px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  padding:8px 12px;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:12px;
+/* NEW SLEEK TOGGLE */
+.theme-switch-wrapper {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  z-index: 100;
+}
+
+.theme-switch {
+  display: inline-block;
+  height: 30px;
+  position: relative;
+  width: 60px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background: #2b394d;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+  border-radius: 34px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* Stars in dark mode */
+.slider:before {
+  content: "★";
+  position: absolute;
+  color: rgba(255,255,255,0.3);
+  font-size: 8px;
+  top: 5px;
+  left: 15px;
+  box-shadow: 10px 8px 0 -1px rgba(255,255,255,0.2), -5px 10px 0 -2px rgba(255,255,255,0.2);
+}
+
+.sun-moon {
+  background-color: #f5f3ce; /* Moon color */
+  bottom: 3px;
+  content: "";
+  height: 22px;
+  left: 33px;
+  position: absolute;
+  transition: .4s;
+  width: 22px;
+  border-radius: 50%;
+  box-shadow: inset -3px -2px 0 0px #d1d0b5;
+}
+
+input:checked + .slider {
+  background: #a5d1e1; /* Light sky color */
+}
+
+input:checked + .slider:before {
+  content: ""; /* Remove stars in light mode */
+}
+
+input:checked + .slider .sun-moon {
+  transform: translateX(-30px);
+  background-color: #ffdb00; /* Sun color */
+  box-shadow: 0 0 10px #ffdb00;
 }
 
 /* HERO */
@@ -140,7 +202,7 @@ h1{
 /* GRID */
 .grid{
   display:grid;
-  grid-template_columns:1fr 1fr;
+  grid-template-columns:1fr 1fr;
   gap:18px;
   margin-top:40px;
 }
@@ -187,7 +249,14 @@ h1{
 
 <body>
 
-<div class="toggle" onclick="toggleTheme()">Toggle Theme</div>
+<div class="theme-switch-wrapper">
+  <label class="theme-switch" for="checkbox">
+    <input type="checkbox" id="checkbox" onclick="toggleTheme()" />
+    <div class="slider">
+      <div class="sun-moon"></div>
+    </div>
+  </label>
+</div>
 
 <div class="container">
 
