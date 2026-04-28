@@ -38,16 +38,45 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden; /* Single page feel */
+  flex-direction: column; /* Changed to accommodate nav */
   transition: background .3s, color .3s;
 }
+
+/* MATCHING NAVIGATION BAR */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 15px 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.nav-content {
+  max-width: 900px;
+  margin: auto;
+  padding: 0 24px;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.nav-link:hover { opacity: 0.7; }
 
 .container {
   max-width: 900px;
   width: 100%;
-  padding: 40px 24px;
+  padding: 60px 24px;
+  margin: auto; /* Centers the content vertically and horizontally */
   position: relative;
   z-index: 10;
 }
@@ -55,11 +84,12 @@ body {
 /* THEME TOGGLE */
 .theme-switch-wrapper {
   position: fixed;
-  top: 20px;
+  bottom: 20px; /* Moved to bottom right to avoid nav overlap */
   right: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 100;
 }
 .theme-switch { display: inline-block; height: 28px; position: relative; width: 54px; }
 .theme-switch input { display: none; }
@@ -73,18 +103,6 @@ body {
 }
 input:checked + .slider { background: #a5d1e1; }
 input:checked + .slider .sun-moon { transform: translateX(-24px); background-color: #ffdb00; }
-
-/* HEADER & BACK */
-.back {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 24px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--accent);
-  text-decoration: none;
-}
 
 .header { margin-bottom: 32px; }
 .kicker { font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
@@ -150,15 +168,24 @@ h1 { font-size: clamp(28px, 4vw, 42px); margin: 0 0 16px 0; font-weight: 600; li
 }
 
 @media(max-width:768px) {
-  body { overflow: auto; align-items: flex-start; }
+  body { overflow: auto; }
   .grid { grid-template-columns: 1fr; }
-  .container { padding-top: 80px; }
+  .container { padding-top: 40px; }
   .btn-main { width: 100%; justify-content: center; }
 }
 </style>
 </head>
 
 <body>
+
+<nav class="nav-bar">
+  <div class="nav-content">
+    <a href="index.html" class="nav-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      Home
+    </a>
+  </div>
+</nav>
 
 <div class="theme-switch-wrapper">
   <label class="theme-switch" for="checkbox">
@@ -168,11 +195,6 @@ h1 { font-size: clamp(28px, 4vw, 42px); margin: 0 0 16px 0; font-weight: 600; li
 </div>
 
 <div class="container">
-  <a class="back" href="index.html">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-    Return to Profile
-  </a>
-
   <div class="header">
     <div class="kicker">Model Risk & Compliance</div>
     <h1>Fraud Detection Audit</h1>
