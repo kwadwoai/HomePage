@@ -14,9 +14,9 @@
   --text:#e5e7eb;
   --muted:#9ca3af;
   --accent:#3b82f6; 
-  --pre:#db2777; /* Pink Phase */
-  --train:#f59e0b;
-  --post:#10b981;
+  --pre:#db2777;   /* Pink */
+  --train:#f59e0b; /* Amber */
+  --post:#10b981;  /* Green */
 }
 
 body.light{
@@ -55,14 +55,19 @@ input:checked + .slider .sun-moon { transform: translateX(-20px); background-col
 h1 { font-size:32px; font-weight:600; margin: 0 0 10px 0; letter-spacing: -0.02em; }
 .meta { font-size:14px; color:var(--muted); }
 
-/* CLICKABLE ROADMAP */
+/* COLOR-MATCHED ROADMAP */
 .roadmap { display: flex; gap: 15px; margin: 40px 0; }
 .roadmap-box { 
   flex: 1; padding: 20px; border-radius: 12px; background: var(--panel); 
   border: 1px solid var(--border); text-align: center; 
-  text-decoration: none; color: inherit; transition: transform 0.2s ease, border-color 0.2s ease;
+  text-decoration: none; color: inherit; transition: all 0.2s ease;
 }
-.roadmap-box:hover { transform: translateY(-3px); border-color: var(--accent); }
+.roadmap-box:hover { transform: translateY(-3px); }
+/* Hover behaviors specific to phase colors */
+.box-pre:hover { border-color: var(--pre); box-shadow: 0 5px 15px -5px rgba(219, 39, 119, 0.3); }
+.box-train:hover { border-color: var(--train); box-shadow: 0 5px 15px -5px rgba(245, 158, 11, 0.3); }
+.box-post:hover { border-color: var(--post); box-shadow: 0 5px 15px -5px rgba(16, 185, 129, 0.3); }
+
 .roadmap-box h4 { margin: 0 0 5px 0; font-size: 11px; text-transform: uppercase; color: var(--muted); }
 .roadmap-box div { font-weight: 600; font-size: 15px; }
 
@@ -77,7 +82,7 @@ h1 { font-size:32px; font-weight:600; margin: 0 0 10px 0; letter-spacing: -0.02e
 .table td { padding: 16px 20px; font-size: 13.5px; border-bottom: 1px solid var(--border); }
 .table tr:last-child td { border-bottom: none; }
 
-/* REFINED GHOST BUTTONS */
+/* VIEW BUTTONS */
 .link-btn {
   display:inline-block; padding:6px 18px; font-size:12px; border-radius:6px; 
   background: transparent; color:var(--accent); text-decoration:none; font-weight: 600;
@@ -115,13 +120,13 @@ h1 { font-size:32px; font-weight:600; margin: 0 0 10px 0; letter-spacing: -0.02e
   </div>
 
   <div class="roadmap">
-    <a href="#phase1" class="roadmap-box" style="border-top: 4px solid var(--pre)">
+    <a href="#phase1" class="roadmap-box box-pre" style="border-top: 4px solid var(--pre)">
       <h4>Phase 1</h4><div style="color:var(--pre)">Pre-Training</div>
     </a>
-    <a href="#phase2" class="roadmap-box" style="border-top: 4px solid var(--train)">
+    <a href="#phase2" class="roadmap-box box-train" style="border-top: 4px solid var(--train)">
       <h4>Phase 2</h4><div style="color:var(--train)">Training</div>
     </a>
-    <a href="#phase3" class="roadmap-box" style="border-top: 4px solid var(--post)">
+    <a href="#phase3" class="roadmap-box box-post" style="border-top: 4px solid var(--post)">
       <h4>Phase 3</h4><div style="color:var(--post)">Post-Training</div>
     </a>
   </div>
