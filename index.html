@@ -15,7 +15,6 @@
   --text:#e5e7eb;
   --muted:#9ca3af;
   --accent:#2563eb;
-  --toggle-bg: #1e293b;
 }
 
 body.light{
@@ -25,7 +24,6 @@ body.light{
   --text:#111827;
   --muted:#6b7280;
   --accent:#2563eb;
-  --toggle-bg: #83b4c1;
 }
 
 body{
@@ -42,12 +40,13 @@ body{
   padding:70px 24px;
 }
 
-/* NEW SLEEK TOGGLE */
+/* THEME TOGGLE UNIT */
 .theme-switch-wrapper {
   position: fixed;
   top: 25px;
   right: 25px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   z-index: 100;
 }
@@ -77,7 +76,7 @@ body{
   overflow: hidden;
 }
 
-/* Stars in dark mode */
+/* Moon Stars */
 .slider:before {
   content: "★";
   position: absolute;
@@ -89,7 +88,7 @@ body{
 }
 
 .sun-moon {
-  background-color: #f5f3ce; /* Moon color */
+  background-color: #f5f3ce;
   bottom: 3px;
   content: "";
   height: 22px;
@@ -102,17 +101,27 @@ body{
 }
 
 input:checked + .slider {
-  background: #a5d1e1; /* Light sky color */
+  background: #a5d1e1;
 }
 
 input:checked + .slider:before {
-  content: ""; /* Remove stars in light mode */
+  content: ""; 
 }
 
 input:checked + .slider .sun-moon {
   transform: translateX(-30px);
-  background-color: #ffdb00; /* Sun color */
+  background-color: #ffdb00;
   box-shadow: 0 0 10px #ffdb00;
+}
+
+/* THEME TEXT LABEL */
+#theme-text {
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
 }
 
 /* HERO */
@@ -171,7 +180,7 @@ h1{
   margin-bottom:16px;
 }
 
-/* LINKS WITH ICONS */
+/* LINKS */
 .links a{
   display:inline-flex;
   align-items:center;
@@ -238,7 +247,6 @@ h1{
   opacity:0.9;
 }
 
-/* MOBILE */
 @media(max-width:768px){
   .grid{
     grid-template-columns:1fr;
@@ -256,6 +264,7 @@ h1{
       <div class="sun-moon"></div>
     </div>
   </label>
+  <div id="theme-text">Dark mode</div>
 </div>
 
 <div class="container">
@@ -324,7 +333,11 @@ h1{
 
 <script>
 function toggleTheme(){
-  document.body.classList.toggle("light");
+  const isLight = document.body.classList.toggle("light");
+  const themeText = document.getElementById("theme-text");
+  
+  // Update the label based on the current state
+  themeText.innerText = isLight ? "Light mode" : "Dark mode";
 }
 </script>
 
