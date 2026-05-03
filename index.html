@@ -134,14 +134,14 @@ h1 {
 .card h3 { font-size: 15px; margin: 0 0 6px 0; }
 .card p { color:var(--muted); font-size: 13px; margin: 0 0 12px 0; line-height: 1.4; }
 
-/* Grouping buttons for side-by-side layout */
+/* Container to keep multiple buttons side-by-side */
 .btn-group {
   display: flex;
   gap: 8px;
-  align-self: flex-start;
 }
 
 .btn {
+  align-self: flex-start; /* Keeps the button from stretching to full width */
   padding: 8px 12px; background:var(--accent); color:white;
   border-radius: 6px; text-decoration:none; font-size: 12px; font-weight: 500;
 }
@@ -197,7 +197,7 @@ h1 {
       <p>Full bias audit of a mobile money fraud detection model across 6.3 million transactions. EOD failure confirmed. BoG CISD 2026 regulatory finding triggered.</p>
       <div class="btn-group">
         <a class="btn" href="paysim-fraud.html">View Audit</a>
-        <!-- Button linked to your new file, set to open in a new tab -->
+        <!-- New Paper button opens in new tab -->
         <a class="btn" href="Amponsah_FairnessAudit_MoMoPaper.html" target="_blank">View Paper</a>
       </div>
     </div>
